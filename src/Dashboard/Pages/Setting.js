@@ -1,35 +1,64 @@
-import React from 'react'
+import React from 'react';
 
 const Setting = () => {
   return (
-    <div className='text-white'>
-    <h2 className='text-2xl font-semibold'>Settings</h2>
-    <div className='mt-6 bg-[#343a40] p-3 flex flex-col gap-5 rounded'>
-    <h3 className='text-center font-semibold'>Increase | Drecrease For Members</h3>
-    <input type="number" placeholder='Enter Account ID' className='p-2 rounded bg-[#454d55]'/>
-    <select name="Function" id="function"  className='p-2 rounded bg-[#454d55]'>
-        <option value=""  className='p-2 rounded'>Increase</option>
-        <option value=""  className='p-2 rounded'>Decrease</option>
-    </select>
-    <input type="number" placeholder='Amount'  className='p-2 rounded bg-[#454d55]'/>
-    <button  className='p-2 rounded bg-[#3f6791] hover:bg-[#3f6791]/80'>Submit</button>
-    </div>
-    {/*  */}
-    
-            <div className="mt-6 bg-[#343a40] p-3 flex flex-col gap-5 rounded">
-              <h2 className="text-xl font-semibold mb-4 text-center">Telegram</h2>
-              <div className="mb-6 flex flex-col gap-5">
-                <h3 className="text-lg font-semibold">Telegram</h3>
-                <input type="text" placeholder="Enter Telegram Link" className='p-2 rounded bg-[#454d55]' />
-                <input type="text" placeholder="Online Services" className='p-2 rounded bg-[#454d55]' />
-                <input type="text" placeholder="Enter App Link" className='p-2 rounded bg-[#454d55]' />
-        
-                <button className='p-2 rounded bg-[#3f6791] hover:bg-[#3f6791]/80'>Submit</button>
-              </div>
-            </div>
-      
-    </div>
-  )
-}
+    <div className="container mx-auto text-[#FF9F00]">
+      <h2 className="text-2xl font-bold bg-[#FF9F00] text-white py-3 px-4 rounded-md shadow-md text-center">
+        Settings
+      </h2>
 
-export default Setting
+      {/* Increase | Decrease Section */}
+      <div className="bg-white w-full p-5 mt-6 rounded-lg shadow-lg border border-[#FF9F00]">
+        <h3 className="text-center font-semibold text-[#FF9F00]">Increase | Decrease For Members</h3>
+        <input
+          type="number"
+          placeholder="Enter Account ID"
+          className="py-2 px-3 rounded-md border border-[#FF9F00] text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9F00] w-full mt-3"
+        />
+        <select
+          name="Function"
+          id="function"
+          className="py-2 px-3 rounded-md border border-[#FF9F00] text-black w-full mt-3"
+        >
+          <option value="increase">Increase</option>
+          <option value="decrease">Decrease</option>
+        </select>
+        <input
+          type="number"
+          placeholder="Amount"
+          className="py-2 px-3 rounded-md border border-[#FF9F00] text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9F00] w-full mt-3"
+        />
+        <button className="mt-4 px-6 py-2 bg-[#FF9F00] text-white rounded-md font-semibold hover:bg-orange-600 transition shadow-md w-full">
+          Submit
+        </button>
+      </div>
+
+      {/* Telegram Section */}
+      <div className="bg-white w-full p-5 mt-6 rounded-lg shadow-lg border border-[#FF9F00]">
+        <h2 className="text-xl font-semibold text-[#FF9F00] text-center">Telegram</h2>
+        <div className="flex flex-col gap-4 mt-4">
+          <input
+            type="text"
+            placeholder="Enter Telegram Link"
+            className="py-2 px-3 rounded-md border border-[#FF9F00] text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9F00] w-full"
+          />
+          <input
+            type="text"
+            placeholder="Online Services"
+            className="py-2 px-3 rounded-md border border-[#FF9F00] text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9F00] w-full"
+          />
+          <input
+            type="text"
+            placeholder="Enter App Link"
+            className="py-2 px-3 rounded-md border border-[#FF9F00] text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF9F00] w-full"
+          />
+          <button className="mt-4 px-6 py-2 bg-[#FF9F00] text-white rounded-md font-semibold hover:bg-orange-600 transition shadow-md w-full">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Setting;

@@ -4,8 +4,7 @@ import Sidebar from './Dashboard/Layout/Sidebar';
 import TopBar from './Dashboard/Layout/Topbar';
 import './index.css';
 import Wingo from './Dashboard/Pages/Wingo';
-import D from './Dashboard/Pages/5D';
-import K3 from './Dashboard/Pages/K3';
+
 import Member from './Dashboard/Members/Member';
 import Agent from './Dashboard/Agents/Agent';
 import CreatedSalery from './Dashboard/Pages/CreatedSalery';
@@ -55,7 +54,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-[#454d55]">
+    <div className="bg-slate-100">
       {isLoading ? (
         <Loader />
       ) : (
@@ -76,8 +75,7 @@ const App = () => {
               <div className="p-4">
                 <Routes>
                   <Route path="/" element={<Wingo />} />
-                  <Route path="/5d" element={<D />} />
-                  <Route path="/k3" element={<K3 />} />
+                 
                   <Route path="/members" element={<Member />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/agents" element={<Agent />} />

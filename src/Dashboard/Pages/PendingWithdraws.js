@@ -1,8 +1,8 @@
-import React from "react";
-import { FaCheck, FaTrash } from "react-icons/fa";
+import React, { useState } from "react";
+import { AiOutlineCheck, AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 
-const tableData = [
+const initialData = [
   {
     id: 187,
     upi: "ia3553421@gmail.com",
@@ -13,118 +13,141 @@ const tableData = [
     ifscCode: "HDFC0002655",
     cardholderName: "IRFAN AHMAD",
     amount: "₹300",
-    status: "Waiting...",
+    status: "Pending",
     date: "2024-08-08 5:24:21 PM",
   },
   {
-    id: 187,
-    upi: "ia3553421@gmail.com",
-    usdtAddress: "Mumbai",
-    account: "7208305839",
-    bank: "HDFC",
-    accountNumber: "501004085958850",
-    ifscCode: "HDFC0002655",
-    cardholderName: "IRFAN AHMAD",
-    amount: "₹300",
-    status: "Waiting...",
-    date: "2024-08-08 5:24:21 PM",
+    id: 188,
+    upi: "example123@upi",
+    usdtAddress: "Delhi",
+    account: "9876543210",
+    bank: "ICICI",
+    accountNumber: "123456789012",
+    ifscCode: "ICIC0001234",
+    cardholderName: "Rahul Sharma",
+    amount: "₹500",
+    status: "Approved",
+    date: "2024-08-09 4:10:15 PM",
   },
-  {
-    id: 187,
-    upi: "ia3553421@gmail.com",
-    usdtAddress: "Mumbai",
-    account: "7208305839",
-    bank: "HDFC",
-    accountNumber: "501004085958850",
-    ifscCode: "HDFC0002655",
-    cardholderName: "IRFAN AHMAD",
-    amount: "₹300",
-    status: "Waiting...",
-    date: "2024-08-08 5:24:21 PM",
-  },
-  // Add other rows similarly...
 ];
 
-const handleApprove = () => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You want to approve this transaction?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, approve it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire("Approved!", "The transaction has been approved.", "success");
-    }
-  });
-};
-
-const handleDelete = () => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire("Deleted!", "The transaction has been deleted.", "success");
-    }
-  });
-};
-
 const ApproveWithdrawal = () => {
+  const [tableData, setTableData] = useState(initialData);
+
+  const handleApprove = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to approve this withdrawal?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff9933",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, approve it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTableData((prevData) =>
+          prevData.map((item) =>
+            item.id === id ? { ...item, status: "Approved" } : item
+          )
+        );
+        Swal.fire("Approved!", "The withdrawal has been approved.", "success");
+      }
+    });
+  };
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this record?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff9933",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTableData((prevData) => prevData.filter((item) => item.id !== id));
+        Swal.fire("Deleted!", "The record has been deleted.", "success");
+      }
+    });
+  };
+
   return (
-    <div className="container mx-auto text-white">
-      <h2 className="text-2xl font-bold text-primary mb-4 text-white p-2 rounded">Approve Withdrawal</h2>
-      <div className="w-full overflow-x-auto">
-      <table className="min-w-full bg-[#343a40] border border-zinc-300 rounded-lg shadow-md overflow-auto">
-        <thead>
-          <tr className="bg-[#3f6791] text-white">
-            <th className="py-2 px-4 border-b">#</th>
-            <th className="py-2 px-4 border-b">UPI</th>
-            <th className="py-2 px-4 border-b">USDT Address</th>
-            <th className="py-2 px-4 border-b">Account</th>
-            <th className="py-2 px-4 border-b">Bank</th>
-            <th className="py-2 px-4 border-b">Account Number</th>
-            <th className="py-2 px-4 border-b">IFSC Code</th>
-            <th className="py-2 px-4 border-b">Cardholder Name</th>
-            <th className="py-2 px-4 border-b">Amount</th>
-            <th className="py-2 px-4 border-b">Status</th>
-            <th className="py-2 px-4 border-b">Date</th>
-            <th className="py-2 px-4 border-b">Action</th>
-          </tr>
-        </thead>
-        <tbody className="">
-          {tableData.map((data, index) => (
-            <tr key={data.id} className="text-white">
-              <td className="py-2 px-4 border-b">{data.id}</td>
-              <td className="py-2 px-4 border-b">{data.upi}</td>
-              <td className="py-2 px-4 border-b">{data.usdtAddress}</td>
-              <td className="py-2 px-4 border-b">{data.account}</td>
-              <td className="py-2 px-4 border-b">{data.bank}</td>
-              <td className="py-2 px-4 border-b">{data.accountNumber}</td>
-              <td className="py-2 px-4 border-b">{data.ifscCode}</td>
-              <td className="py-2 px-4 border-b">{data.cardholderName}</td>
-              <td className="py-2 px-4 border-b">{data.amount}</td>
-              <td className="py-2 px-4 border-b">{data.status}</td>
-              <td className="py-2 px-4 border-b">{data.date}</td>
-              <td className="py-2 px-4 border-b flex gap-2 justify-around">
-                <button onClick={handleApprove} className="bg-green-500 text-white hover:bg-green-600 px-2 py-1 rounded">
-                  <FaCheck />
-                </button>
-                <button onClick={handleDelete} className="bg-red-500 text-white hover:bg-red-600 px-2 py-1 rounded">
-                  <FaTrash />
-                </button>
-              </td>
+    <div className="p-4 bg-white min-h-screen">
+      {/* Header Section */}
+      <h2 className="text-2xl font-semibold p-4 text-white bg-[#ff9933] rounded-md text-center shadow-md">
+        Approve Withdrawal
+      </h2>
+
+      {/* Table Section */}
+      <div className="overflow-x-auto bg-white p-4 rounded-md mt-4 shadow-lg border border-[#ff9933]">
+        <table className="min-w-full border border-[#ff9933] text-black">
+          <thead>
+            <tr className="bg-[#ff9933] text-white">
+              {[
+                "#",
+                "UPI",
+                "USDT Address",
+                "Account",
+                "Bank",
+                "Account Number",
+                "IFSC Code",
+                "Cardholder Name",
+                "Amount",
+                "Status",
+                "Date",
+                "Action",
+              ].map((heading, index) => (
+                <th key={index} className="border border-white px-4 py-3 text-center font-semibold">
+                  {heading}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tableData.map((data, index) => (
+              <tr key={data.id} className="hover:bg-[#ffe5cc] transition-all">
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{index + 1}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.upi}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.usdtAddress}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.account}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.bank}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.accountNumber}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.ifscCode}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.cardholderName}</td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.amount}</td>
+                <td
+                  className={`border border-[#ff9933] px-4 py-3 text-center font-semibold ${
+                    data.status === "Approved"
+                      ? "text-green-500"
+                      : data.status === "Rejected"
+                      ? "text-red-500"
+                      : "text-[#ff9933]"
+                  }`}
+                >
+                  {data.status}
+                </td>
+                <td className="border border-[#ff9933] px-4 py-3 text-center">{data.date}</td>
+                <td className="border border-[#ff9933] px-4 py-3 flex justify-center gap-2">
+                  {data.status === "Pending" && (
+                    <button
+                      className="bg-green-500 hover:bg-green-600 text-white p-2 rounded flex items-center justify-center w-8 h-8 transition-all"
+                      onClick={() => handleApprove(data.id)}
+                    >
+                      <AiOutlineCheck size={18} />
+                    </button>
+                  )}
+                  <button
+                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded flex items-center justify-center w-8 h-8 transition-all"
+                    onClick={() => handleDelete(data.id)}
+                  >
+                    <AiOutlineDelete size={18} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

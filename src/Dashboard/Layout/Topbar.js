@@ -3,7 +3,7 @@ import { FaBars } from 'react-icons/fa';
 
 const TopBar = ({ toggleSidebar, toggleMinimize, isSidebarMinimized }) => {
   return (
-    <div className="flex items-center justify-between bg-gray-900 text-white p-4">
+    <div className="flex items-center justify-between bg-orange-500 text-white p-4">
       <div className="flex items-center">
         <button onClick={toggleSidebar} className="md:hidden topbar-button">
           <FaBars />
