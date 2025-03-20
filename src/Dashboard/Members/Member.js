@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getUser } from "../utils/userSlice";
 
 const data = [
   { id: 39558, mobile: "8169448604", position: "USER", referCode: "JIvQz97554", referBy: "oCNXn89123", amount: 1170, password: "Marshal@1421", status: "Active" },
@@ -16,7 +18,18 @@ const Member = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 5;  
+  const dispatch =  useDispatch();
+
+  const user  =  useSelector((store) => (store?.user?.user))
+  console.log("this is all user data"  , user);
+
+
+  useEffect(()=>{
+
+      dispatch(getUser());
+
+  } , [])
 
   const filteredData = data.filter(
     (item) =>
@@ -48,7 +61,8 @@ const Member = () => {
       }
     });
   };
-
+  
+  if(user === null)  return <div>Loading...</div>
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-3xl font-semibold text-orange-600 mb-6">Member List</h2>
@@ -90,17 +104,17 @@ const Member = () => {
             </tr>
           </thead>
           <tbody>
-            {paginatedData.map((item) => (
+            {user.details.map((item) => (
               <tr key={item.id} className="text-center text-orange-700">
-                <td className="py-2 border border-orange-300">{item.id}</td>
-                <td className="py-2 border border-orange-300">{item.mobile}</td>
-                <td className="py-2 border border-orange-300">{item.position}</td>
-                <td className="py-2 border border-orange-300">{item.referCode}</td>
-                <td className="py-2 border border-orange-300">{item.referBy}</td>
-                <td className="py-2 border border-orange-300">{item.amount}</td>
-                <td className="py-2 border border-orange-300">{item.password}</td>
+                <td className="py-2 border border-orange-300">{item.userId}</td>
+                <td className="py-2 border border-orange-300">{item.phone}</td>
+                <td className="py-2 border border-orange-300">{item.role}</td>
+                <td className="py-2 border border-orange-300"> {item.refercode === null ? "" : item.refercode}</td>
+                <td className="py-2 border border-orange-300">{item.referedBy === null ? "" : item.referedBy}</td>
+                <td className="py-2 border border-orange-300">{item.money}</td>
+                <td className="py-2 border border-orange-300">{item.password  === null ? "null" : "123456"}</td>
                 <td className="py-2 border border-orange-300">
-                  <span className="bg-green-500 text-white px-2 py-1 rounded">{item.status}</span>
+                  <span className="bg-green-500 text-white px-2 py-1 rounded">{item.status === "1" ? "Active" : "Inactive"}</span>
                 </td>
                 <td className="py-2 border border-orange-300 flex justify-center space-x-2">
                   <Link to={`/profile/${item.id}`}>

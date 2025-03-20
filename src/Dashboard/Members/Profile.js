@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdPerson } from 'react-icons/md';
 
 const withdrawalHistory = [
   { id: 1, amount: 200, bank: 'Bank A', status: 'Completed', time: '2024-08-09 14:22' },
@@ -23,11 +24,12 @@ const Profile = () => {
         {/* Left Sidebar */}
         <div className="w-full md:w-1/3 p-4 bg-[#FF9F00] text-white rounded-lg shadow-lg">
           <div className="flex items-center gap-4 mb-4">
-            <img
-              className="w-16 h-16 rounded-full bg-white"
+            {/* <img
+              className="w-16 h-16 rounded-full bg-red-500 text-white"
               src="https://openui.fly.dev/openui/24x24.svg?text=👤&background=FFFFFF&color=FF9F00"
               alt="User Avatar"
-            />
+            /> */}
+            <MdPerson className="text-white  text-3xl" />
             <div>
               <h2 className="text-xl font-bold">Member64708</h2>
               <p className="text-sm">ID: 96116</p>
